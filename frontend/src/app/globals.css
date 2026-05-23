@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #060912;
+    --foreground: #f1f5f9;
+    --muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.12);
+    --glass: rgba(15, 23, 42, 0.55);
+    --neon-purple: #a855f7;
+    --neon-cyan: #22d3ee;
+  }
+
+  * {
+    @apply border-[var(--border)];
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] antialiased;
+    background-image: radial-gradient(
+        ellipse 100% 80% at 50% -30%,
+        rgba(88, 28, 135, 0.18),
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse 60% 40% at 100% 0%,
+        rgba(59, 130, 246, 0.08),
+        transparent 40%
+      );
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-panel-hover {
+    @apply glass-panel transition-all duration-300;
+  }
+
+  .glass-panel-hover:hover {
+    @apply border-purple-500/30 bg-white/[0.06];
+    box-shadow: 0 12px 40px rgba(168, 85, 247, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-purple-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent;
+  }
+
+  .glow-border {
+    position: relative;
+  }
+
+  .glow-border::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(168, 85, 247, 0.5),
+      rgba(34, 211, 238, 0.3),
+      rgba(59, 130, 246, 0.2)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .upload-glow {
+    animation: upload-pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes upload-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 30px 4px rgba(168, 85, 247, 0.15);
+    }
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 3px;
+}
